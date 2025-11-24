@@ -1,4 +1,9 @@
-# Protokoll
-Betreuender Professor: Kurzzeichen  
-Laboreinheit: XX. XXX. 2024
-Note: XX.XX / 100,00  
+# Fahrradlicht
+## Collaborators
+- Alexander Masser
+- Valentin Maier
+- Tobias Huber
+- Arwin Faethe
+- Lilly Affenberger
+- Aldin Sabic
+- Mikael Arslan
