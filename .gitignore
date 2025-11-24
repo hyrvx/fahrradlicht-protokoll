@@ -1,0 +1,30 @@
+# LaTeX files
+*.aux
+*.log
+*.toc
+*.out
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.blg
+*.bcf
+*.run.xml
+*.lof
+*.bbl-SAVE-ERROR
+main-blx.bib
+~$Messungen.xlsx
+main.bcf
+main.run.xml
+~$*.xlsx
+main.atfi
+#build/
+*.bbl
+*.atfi
+!*/sources.bib
+!*/images.bib
+*.lot
+*.synctex(busy)
+*.bcf-SAVE-ERROR
+
+# Main PDF, everyone should build it themselves
+*\main.pdf
