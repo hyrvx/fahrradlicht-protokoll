@@ -1,0 +1,11 @@
+# Start with the TeX Live base image
+FROM texlive/texlive:latest
+
+# Set the working directory inside the container
+WORKDIR /workdir
+
+# Mount a volume (this would still require specifying it with `docker run`)
+VOLUME ["/workdir"]
+
+# Keep the container open for interactive use
+CMD ["/bin/bash"]

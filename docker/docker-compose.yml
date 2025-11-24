@@ -1,0 +1,11 @@
+version: "3.8"
+services:
+  latex:
+    image: texlive/texlive:latest
+    container_name: latex_container
+    working_dir: /workdir
+    volumes:
+      - ../:/workdir  # Mount the Protokoll directory containing the docker folder
+    stdin_open: true
+    tty: true
+  
