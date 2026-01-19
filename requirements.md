@@ -1,0 +1,33 @@
+TODO
+
+- Introduction
+	- Contributers
+- Prolog
+	- Overview
+	- Project scope
+- Design Process
+	- Design considerations / Target Specs
+	- Block Diagram
+	- Establishing initial parameters
+	- Component selection / Justification of parts
+	- Firmware architecture
+		- Break detection
+		- UPDI Programming
+	- PCB Design
+		- Charging chip layout
+		- Continuous ground plane
+	[...]
+	- Electronics
+		- Schematic
+		- Layout
+		- Total costs / BOM
+	- 3D Design
+		- Requirements
+		- Materials
+		- Housing
+	- Post Design Analsysis
+		- Real time accleration plotting
+- Epilog
+	- Difficulties in break detection
+	- Debugging Pins! Und UART (Haben vergessen bruh)
+	- Potential Improvements for V2
