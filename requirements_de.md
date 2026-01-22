@@ -1,0 +1,50 @@
+TODO
+
+- Einführung
+	- Mitwirkende
+- Prologue
+	- Übersicht
+	- Project scope
+- Design Process
+	- Design Überlegungen / Ziele
+    	- Hell genug für Tageslicht
+    	- Lange Akkulaufzeit & Low Power Design (Sleep modes)
+    	- Wasserdichtes Design und einfacher Mount
+    	- Ladeanimationen
+  	- Festlegung der Parameter (Eig Design Überlegungen)
+	- Block Diagramm
+	- Komponenten Selektion
+    	- MCU
+        	- In Betracht gezogen: ATMega, STM32F0 Serie; billig und einfach, ATTiny1616/817
+        	- Gewählt wurde ATTiny1616
+      	- IMU
+        	- MPU6050, LS3DH, \[...\]
+      	- Ladechip
+        	- TP4056, Team hat mit diesem Chip Erfahrung, sehr populär = viele Resourcen
+      	- Batterie
+        	- War von der Baugröße und Kapazität abhängig
+      	- LEDs
+        	- High Power LEDs, Normale LEDs, Weiß oder Rot, WS2812 wurden genommen aufgrund der einfachen Ansteuerung (Ein Data Pin) und Möglichkeit für (Lade)-animationen
+      	- Step Up
+        	- Wurde aufgrund der WS2812 benötigt, MCP-XXXX, Einfaches Circuit Design, vorallem in Batterie betriebenen Systemen
+	- Firmware Architektur
+		- Bremserkennung
+		- UPDI Programming
+	- PCB Design
+		- Ladeschaltung layout
+		- Groundfläche
+	[...]
+	- Electronics
+		- Schematic
+		- Layout
+		- BOM
+	- 3D Design
+		- Ansprüche / Vorraussetzungen
+		- Materialien
+		- Gehäuse
+	- Post Design Analsysis
+		- Real time accleration plotting
+- Epilog
+	- Difficulties in break detection
+	- Debugging Pins! Und UART (Haben vergessen bruh)
+	- Potential Improvements for V2
