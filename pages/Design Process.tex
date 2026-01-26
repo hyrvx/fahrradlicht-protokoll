@@ -8,8 +8,16 @@ Bevor mit der Entwicklung begonnen wurde, mussten Ziele aufgestellt werden.
     \item Die Platine soll energieeffizient sein, damit das Fahrradlicht lange genug haltet.
 \end{itemize}
 
-\section{Komponentenwahl}
 
+\section{Block Diagramm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resources/Block Diagrams/Overview.png}
+    \caption{Funktionsblockdiagramm}
+\end{figure}
+
+
+\section{Komponentenwahl}
 
 \subsection{Mikrocontroller}
 Aufgrund guter Erfahrung bei vorherigen Projekten wurde zu Beginn der ATTiny1616 unter Betracht bezogen. Dieser hat ein sehr kleines QFN-20 Package und ist ein moderner Microchip Microcontroller.
@@ -42,8 +50,45 @@ Der Ladechip ist der TP4056. Der größte Grund warum sich dafür entschieden wu
 
 
 \section{PCB Design}
-\subsection{Schematic}
+\subsection{Schaltpläne}
+% TODO: Explain each Schematic Block 
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{resources/Board/Schematic/SCH_1.png}
+    \caption{Schaltplan}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{resources/Board/Schematic/SCH_2.png}
+    \caption{Schaltplan}
+\end{figure}
+
+
 \subsection{Layout}
+
+% TODO: The sizes are hacked, maybe just insert the images afterwards into the PDF?
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{resources/Board/Layout/Top.png}
+    \caption{Top layer layout}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{resources/Board/Layout/Bottom.png}
+    \caption{Bottom layer layout}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{resources/Board/Layout/Drill.png}
+    \caption{Drill holes layout}
+\end{figure}
+
 \subsection{BOM}
 
 \section{3D Design}
