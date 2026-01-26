@@ -10,4 +10,57 @@ Bevor mit der Entwicklung begonnen wurde, mussten Ziele aufgestellt werden.
 
 \section{Komponentenwahl}
 
+
+\subsection{Mikrocontroller}
 Aufgrund guter Erfahrung bei vorherigen Projekten wurde zu Beginn der ATTiny1616 unter Betracht bezogen. Dieser hat ein sehr kleines QFN-20 Package und ist ein moderner Microchip Microcontroller.
+
+\subsection{Beschleunigungssensor}
+Der Beschleunigungssensor wird zur Bremserkennung verwendet. Hierfür gab es viele Optionen, darunter auch der sehr populäre und ausführlich dokumentierte MPU6050. Da jedoch großer Wert auf die Batterielaufzeit gelegt wurde, fiel die Wahl aufgrund seines niedrigen Stromverbrauchs auf den \textbf{LIS3DHTR} von STMicroelectronics.
+\subsection{LEDs}
+Für die LEDs wurden einige Optionen in Betracht gezogen:
+
+% TODO: Change this to a list?
+\subsubsection{High Power LEDs}
+HIGH Power LEDs leuchten erstaunlich hell, haben aber den Nachteil das sie gekühlt werden müssen. Für eine LED dieses Typs hätte vermutlich ein passiver Kühlkörper oder eine Kupferfläche auf der Leiterplatte gereicht, jedoch hätte dies extra Platz im Gehäuse verbraucht.
+
+\subsubsection{Bedrahtete 5mm LEDs}
+Diese kann man als herkömmliche LEDs bezeichnen. Ihre THT-Bauform bedeutet jedoch, dass sie mehr Platz auf der Platine beanspruchen würden. Außerdem gab es immer wieder Diskussionen, ob diese Hell genug sein würden. Unterumständen hätten sie auch einen eigenen \textbf{Constant-Current Driver} benötigt. 
+% TODO: Return Paths? 
+\subsubsection{WS2812}
+Für dieses Projekt wurden WS2812-RGB-LEDs gewählt. Sie werden häufig in RGB-Streifen eingesetzt und zeichnen sich durch ihre hervorragende Helligkeit aus. Außerdem liegen im Team bereits Erfahrungen mit ihrer Ansteuerung vor, und sie ermöglichen einfache Animationen, z.B. Ladeanimationen.
+
+
+
+\subsection{Batterie}
+
+\subsection{Ladechip}
+Der Ladechip ist der TP4056. Der größte Grund warum sich dafür entschieden wurde, sind die Resourcen die man Online findet und die Erfahrung die das Team mit diesen Komponenten bereits hat. Er besitzt einen einstellbaren Ladestrom von bis zu 1A und ist einfach zu beschalten. 
+
+
+
+\section{Firmware Architektur}
+
+
+\section{PCB Design}
+\subsection{Schematic}
+\subsection{Layout}
+\subsection{BOM}
+
+\section{3D Design}
+Das Gehäuse wurde in Autodesk Fusion konzipiert. 
+\subsection{Vorraussetzungen}
+
+\begin{itemize}
+    \item Das Gehäuse soll kompakt gehalten werden.
+    \item Es soll möglichst einfach zu montieren sein.
+    \item Es darf kein Wasser in das Gehäuseinnere eintreten.
+    \item Ein Ausschnitt für den Ladeport muss vorhanden sein.
+    \item Es soll in 3D-Druck, bevorzugt FDM-Druck gefertigt werden. 
+\end{itemize}
+
+
+\subsection{Gehäuse}
+
+Um das Gehäuse wasserdicht zu halten, hat man die Nutzung verschiedener Materialien bedacht. Es soll eine Dichtung aus TPU gefertigt werden, die bei der Montage in die Innenwände des Gehäuses eingesetzt wird. Für den USB-C Port soll ein wasserdichter Stöpsel das System wasserfrei halten. 
+
+Für die Montage an das Fahrrad wollte man einen Gummiring verwenden. Dieser könnte entweder gekauft werden oder ebenfalls aus TPU gedruckt werden.  
