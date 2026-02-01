@@ -47,7 +47,7 @@ Der Ladechip ist der TP4056. Der größte Grund warum sich dafür entschieden wu
 
 
 \section{Firmware Architektur}
-
+%TODO: Modi des Fahrradlicht (Sleep etc)
 
 \section{PCB Design}
 \subsection{Schaltpläne}
@@ -64,6 +64,125 @@ Der Ladechip ist der TP4056. Der größte Grund warum sich dafür entschieden wu
     \centering
     \includegraphics[width=\textwidth]{resources/Board/Schematic/SCH_2.png}
     \caption{Schaltplan}
+\end{figure}
+
+
+\subsection{Schaltblöcke}
+
+Der ATTiny1616 Mikrocontroller ist, aufgrund seiner typischen Anwendungen einfach zu beschalten. Zur grundlegenden Operation werden hauptsächlich die Versorgungsleitungen ($V_{CC}$ und $GND$) benötigt. Der Chip wird über dass UDPI (Unified Program and Debug Interface) programmiert, welches sich auf jeden der neueren Chips der ATTiny-Serie befinden. 
+
+% TODO: Schematic of turning a standard RX TX Adapter into a UDPI Programmer
+
+\subsubsection{Mikrocontroller}
+$C1$ und $C2$ sind Stützkondensatoren um glätten der Versorgung. $R3$ und $R4$ sind Pull Up Widerstände, um den $I2C$-Bus betreiben zu können. Es gibt auch einen Button \texttt{SW1} um das Fahrradlicht bedienen zu können.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{resources/Schematics/MCU.png}
+    \caption{Mikrocontroller}
+\end{figure}
+
+\subsubsection{Beschleunigungssensor}
+Der LIS3DHTR muss über seine Pins konfiguriert werden. Er kann sowohl über I2C als auch über SPI betrieben werden. In diesem Projekt wurde er auf I2C konfiguriert, weshalb der Pin \texttt{CS} auf HIGH gesetzt wurde. Außerdem dient dieser Pin dazu, die I2C-Adresse festzulegen. Die ADCs werden nicht verwendet. Die Kondensatoren $C3$ und $C4$ sind laut der Application Note mit $100\,\text{nF}$ bestückt. Der \texttt{INT1}-Pin dient als Interrupt und wird zum Mikrocontroller geführt. Dies wurde als Stromsparmaßnahme getan.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resources/Schematics/Sensor.png}
+    \caption{Beschleunigungssensor im Schaltplan}
+\end{figure}
+
+
+\subsubsection{LEDS}
+Laut Datenblatt soll jede WS2812-LED mit einem Stützkondensator mit einem Wert von $100\,\text{nF}$ beschaltet werden. 
+Da diese adressierbaren LEDs mit einer $5\,\text{V}$-Logik arbeiten, wurde mithilfe eines \texttt{BSS138}-MOSFETs ein Logikpegelwandler realisiert, der das $3{,}3\,\text{V}$-Signal der MCU auf $5\,\text{V}$ umsetzt. 
+Obwohl ein $3{,}3\,\text{V}$-Signal am Datenpin unter Umständen ebenfalls funktioniert hätte, wurde diese Lösung gewählt, um die Funktionalität zu gewährleisten und mögliche Risiken zu vermeiden.
+
+% TODO: Add citation to sparkfun site for this level shfiter
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{resources/Schematics/LEDs.png}
+    \caption{LEDs im Schaltplan}
+\end{figure}
+
+\subsubsection{Anschlüsse}
+Für das Hochladen der Firmware wurde UDPI verwendet. Dafür wurden die Pins \texttt{GND} und \texttt{UDPI} auf zwei Pins herausgeführt. 
+$V_{CC}$ wurde ausgelassen, um Platz auf der Leiterplatte zu sparen. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resources/Schematics/UDPI_Pins.png}
+    \caption{UDPI Stecker im Schaltplan}
+\end{figure}
+
+\noindent Geladen wird das Fahrradlicht über eine USB-C Buchse. Aufgrund der USB-PD Spezifikationen müssen die Leitungen \texttt{CC1} und \texttt{CC2} auf GND über $5,1k\Omega$ Widerstände gezogen werden, da sonst nicht die richtige Spannung vom Netzteil angefragt werden kann.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resources/Schematics/USBC.png}
+    \caption{USB-C im Schematic}
+\end{figure}
+
+\subsubsection{Ladeschaltung}
+Die Application Note im Datenblatt hat sich als genügend bewiesen, obwohl es viele Resourcen zu dem TP4056 Chip online gibt. Stützkondensatoren von $100nF$ und $1\mu F$ stabiliseren die Aus- und Eingangsspannungen. Die Open-Drain Pins $CHRG$ und $STDBY$ geben aus, ob die Batterie ladet bzw. voll ist. Der Ladestrom $I_{BAT}$ wird mit einen Widerstand $R_{PROG}$ (hier R12) am \texttt{PROG}-Pin eingestellt. Die Berechnung ist wie folgt: 
+
+\begin{align}
+    V_{PROG} &= 1V \\
+    I_{BAT} &= \frac{V_{PROG}}{R_{PROG}} \times 1200
+\end{align}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resources/Schematics/Charging_Circuit.png}
+    \caption{Ladeschaltung im Schaltplan}
+\end{figure}
+
+\subsubsection{Überladeschutz}
+Der DW01A ist ein Schutz-IC für einzelne Lithium-Ionen- oder Lithium-Polymer-Zellen. Er überwacht die Zellspannung und schützt die Batterie vor Überladung, Tiefentladung sowie Überstrom. Bei Überschreitung der Grenzwerte schaltet der DW01A die Batterie über externe MOSFETs ab, um Schäden zu vermeiden und die Lebensdauer der Zelle zu erhöhen. Typischerweise wird er zusammen mit zwei externen MOSFETs in Schutzschaltungen für Akkupacks eingesetzt.
+% TODO: No idea what it actually does 💀
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resources/Schematics/Overcharging_Circuit.png}
+    \caption{Überladeschutz im Schaltplan}
+\end{figure}
+
+\subsubsection{Boost-Converter}
+
+Der \textbf{MCP1640} ist eine ausgezeichnete Wahl für dieses Projekt, da er einfach zu beschalten ist und wenig Strom im ausschaltenen Zustand verbraucht. 
+Die Eingangsspannung kann variabel sein, wie es bei LiPo-Akkus typischerweise vorkommt, und dennoch hält er die Ausgangsspannung konstant. 
+Die Schaltung aus der Application Note konnte direkt in den Schaltplan übernommen werden, wobei der Spannungsteiler aus den Widerständen $R15$ und $R17$ die Ausgangsspannung festlegt.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resources/Schematics/Boost.png}
+    \caption{Boost-Converter im Schaltplan}
+\end{figure}
+
+\noindent Für Stromersparnisse wird der ENABLE-Pin des Boost-Converters vom Mikrocontroller gesteuert, wodurch die Schaltung bei Nichtgebrauch deaktiviert und der Energieverbrauch minimiert wird. 
+\subsubsection{Batterieladestandsmessung}
+
+Da die Batteriespannung Werte über dem Maximum des ADCs des Mikrocontrollers erreichen kann, wird ein Spannungsteiler verwendet, um ein geeignetes Signal zu erzeugen. 
+Ein Nachteil dieser Lösung ist jedoch, dass konstant ein Strom fließt, der die Batterie entladen würde. 
+Deshalb wird ein MOSFET eingesetzt, der nur durchschaltet, wenn eine Batteriemessung durchgeführt werden soll. 
+Die Messung des Batterieladestands kann zudem nur sporadisch erfolgen, da sich dieser Parameter nur über größere Zeiträume verändert.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resources/Schematics/Battery_Measurement.png}
+    \caption{Batteriemessungsschaltung}
+\end{figure}
+
+
+\subsubsection{Spannungsregelung mit LDO}
+Für die Versorgung des Mikrocontrollers und der Sensoren werden $3,3\,\text{V}$ benötigt. Hier kommt ein LDO-Spannungsregler zum Einsatz. 
+Im Gegensatz zu herkömmlichen Spannungsreglern ist die Drop-Out-Spannung bei LDOs sehr gering, oft im Millivoltbereich. 
+Dies bietet eine einfache und kostengünstige Möglichkeit, die gewünschte Spannung zu erzeugen. 
+Zwar hätte man sich an der Schaltung des Boost-Converters orientieren können, jedoch erreicht dieser weder die Simplizität noch die Energieeinsparung eines LDOs.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{resources/Schematics/Voltage_Regulator.png}
+    \caption{Spannungsregelung mit LDO}
 \end{figure}
 
 
