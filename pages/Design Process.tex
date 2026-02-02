@@ -9,12 +9,25 @@ Bevor mit der Entwicklung begonnen wurde, mussten Ziele aufgestellt werden.
 \end{itemize}
 
 
-\section{Block Diagramm}
+\section{Blockdiagramm}
+
+Das Blockdiagramm in Abbildung \ref{fig:blockdiagramm} veranschaulicht, wie die einzelnen Komponenten des Fahrradlichts miteinander interagieren.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{resources/Block Diagrams/Overview.png}
     \caption{Funktionsblockdiagramm}
+    \label{fig:blockdiagramm}
 \end{figure}
+
+\noindent Die Batterie versorgt die verschiedenen Teile der Schaltung: 
+Einerseits werden die LEDs über ein Step-Up-Modul mit $5\,\text{V}$ betrieben, 
+andererseits erhalten die digitalen Komponenten eine Versorgungsspannung von $3{,}3\,\text{V}$ vom Low-Dropout-Spannungsregler (LDO). 
+Der Mikrocontroller misst über eine Messschaltung (Abbildung \ref{fig:batteriemessung}) die Batteriespannung. 
+Die Batterie wird über einen Ladechip sowie eine Batterieschutzschaltung geladen. 
+Der Ladechip informiert den Mikrocontroller zudem, ob die Batterie aktuell geladen wird oder bereits vollständig geladen ist. 
+Darüber hinaus übernimmt der Mikrocontroller die Kommunikation sowohl mit dem Beschleunigungssensor als auch mit den LEDs und koordiniert deren Steuerung.
+
 
 
 \section{Komponentenwahl}
@@ -41,6 +54,11 @@ Für dieses Projekt wurden WS2812-RGB-LEDs gewählt. Sie werden häufig in RGB-S
 
 \subsection{Batterie}
 
+Bei der Auswahl der Batterie wurde ein Kompromiss zwischen Typ, Baugröße und Kapazität angestrebt. 
+Daher fiel die Wahl auf einen LiPo-Akku mit einer Kapazität von $1500\,\text{mAh}$. 
+Diese Kapazität ermöglicht eine ausreichende Laufzeit, ohne dass die Abmessungen die Größe der Leiterplatte wesentlich überschreiten.
+
+
 \subsection{Ladechip}
 Der Ladechip ist der TP4056. Der größte Grund warum sich dafür entschieden wurde, sind die Resourcen die man Online findet und die Erfahrung die das Team mit diesen Komponenten bereits hat. Er besitzt einen einstellbaren Ladestrom von bis zu 1A und ist einfach zu beschalten. 
 
@@ -53,19 +71,8 @@ Der Ladechip ist der TP4056. Der größte Grund warum sich dafür entschieden wu
 \subsection{Schaltpläne}
 % TODO: Explain each Schematic Block 
 
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{resources/Board/Schematic/SCH_1.png}
-    \caption{Schaltplan}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{resources/Board/Schematic/SCH_2.png}
-    \caption{Schaltplan}
-\end{figure}
-
+\includepdf[angle=90]{resources/Schematics/Page1.pdf}
+\includepdf[angle=90]{resources/Schematics/Page2.pdf}
 
 \subsection{Schaltblöcke}
 
@@ -170,6 +177,7 @@ Die Messung des Batterieladestands kann zudem nur sporadisch erfolgen, da sich d
     \centering
     \includegraphics[width=0.7\textwidth]{resources/Schematics/Battery_Measurement.png}
     \caption{Batteriemessungsschaltung}
+    \label{fig:batteriemessung}
 \end{figure}
 
 
