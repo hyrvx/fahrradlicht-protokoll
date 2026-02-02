@@ -239,6 +239,48 @@ Außerdem verringern große Flächen die Induktivität im Vergleich zu schmalen 
 
 \subsection{BOM}
 
+% i hacked the table sizes and fuck you im proud of it
+% please fix it
+\begin{table}[H]
+    \centering
+    \begin{tabularx}{\textwidth}{|l|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|l|l|}
+    \hline
+        \textbf{Qty} & \textbf{Comment} & \textbf{Designator} & \textbf{Supplier Part} & \textbf{JLCPCB Price} \\ \hline
+        1 & 10uF & C1 & C15525 & 0.0008 \\ \hline
+        10 & 100nF & C2,C3,C4,C5,C6,C7,C8,C9,C12,C15 & C1525 & 0.0002 \\ \hline
+        2 & 1uF & C10,C11 & C52923 & 0.0005 \\ \hline
+        2 & 10uF & C13,C16 & C19702 & 0.001 \\ \hline
+        1 & 4.7uF & C14 & C19666 & 0.0015 \\ \hline
+        1 & PZ254V-11-02P & H1 & C492401 & 0.0018 \\ \hline
+        1 & 4.7uH & L1 & C395016 & 0.0036 \\ \hline
+        5 & WS2812C & LED2,LED3,LED4,LED5,LED6 & C114587 & 0.0145 \\ \hline
+        1 & BSS138 & Q1 & C18212695 & 0.0029 \\ \hline
+        1 & IRLML6402TRPBF & Q2 & C2593 & 0.0164 \\ \hline
+        1 & FS8205A & Q3 & C908265 & 0.01 \\ \hline
+        6 & 10k & R2,R5,R6,R9,R10,R14 & C25744 & 0.0002 \\ \hline
+        2 & 10k & R3,R4 & C25804 & 0.0002 \\ \hline
+        2 & 5.1k & R7,R8 & C25905 & 0.0002 \\ \hline
+        1 & 33k & R11 & C25779 & 0.0002 \\ \hline
+        1 & 1.5k & R12 & C25867 & 0.0002 \\ \hline
+        1 & 100 & R13 & C22775 & 0.0002 \\ \hline
+        1 & 976k & R15 & C25802 & 0.0001 \\ \hline
+        1 & 1k & R16 & C17513 & 0.0004 \\ \hline
+        1 & 309k & R17 & C5713270 & 0.0001 \\ \hline
+        1 & TS-1088-AR02016 & SW1 & C720477 & 0.0065 \\ \hline
+        1 & ATTINY1616-MNR & U1 & C507118 & 0.1323 \\ \hline
+        1 & LIS3DHTR & U2 & C15134 & 0.111 \\ \hline
+        1 & MCP1700T-3302E/TT & U3 & C39051 & 0.0524 \\ \hline
+        1 & TP4056 & U4 & C42422118 & 0.007 \\ \hline
+        1 & MCP1640BT-I/CHY & U5 & C478087 & 0.1204 \\ \hline
+        1 & DW01A & U6 & C351410 & 0.0061 \\ \hline
+        1 & S2B-PH-K-S(LF)(SN) & U7 & C173752 & 0.0052 \\ \hline
+        1 & TYPE-C-31-M-12 & USB & C165948 & 0.0259 \\ \hline
+    \end{tabularx}
+\end{table}
+
+Der Preis mit Bestückungsservice und Versandkosten lief auf JLCPCB auf PREIS aus. % TODO, Preis
+
+
 \section{3D Design}
 Das Gehäuse wurde in Autodesk Fusion konzipiert. 
 \subsection{Vorraussetzungen}
