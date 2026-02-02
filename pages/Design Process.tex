@@ -188,6 +188,41 @@ Zwar hätte man sich an der Schaltung des Boost-Converters orientieren können, 
 
 \subsection{Layout}
 
+Das Layout des Boards musste mehrere Anforderungen erfüllen. Es sollte professionell gestaltet werden und GND- sowie Versorgungsflächen enthalten. 
+Zudem sollten mindestens zwei Stellen für Befestigungslöcher freigehalten werden. Die LEDs sowie der Taster sollten zentriert auf dem Board platziert werden. Sowohl der JST-Stecker als auch der USB-C-Anschluss wurden strategisch positioniert, um die Integration in das Gehäusedesign zu erleichtern.
+
+
+\subsubsection{Kondensatoren}
+
+Bereits beim Platzieren der Bauteile wurde darauf geachtet, die Stützkondensatoren möglichst nahe an den jeweiligen Versorgungspins zu positionieren. Dies dient dazu, Störfrequenzen sowie Spannungsschwankungen effektiv zu reduzieren. In Abbildung \ref{fig:kondensator_bei_versorgung} sieht man, dass der Kondensator \texttt{C8} nahe des Versorgungspins der \texttt{LED5} platziert wurde.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{resources/Board/Layout/Capacitor_close_to_supply.png}
+    \caption{Kondensator bei Versorgungspins}
+    \label{fig:kondensator_bei_versorgung}
+\end{figure}
+
+\subsubsection{GND-Flächen}
+
+GND-Flächen sind in professionellen Leiterplattendesigns weit verbreitet und bieten mehrere Vorteile. 
+Zum einen ermöglichen sie einen Rückstrompfad mit niedriger Impedanz, was die elektrische Stabilität verbessert. 
+Zum anderen vereinfachen sie die Leiterbahnführung erheblich: Traces müssen nicht mehr jeden Punkt direkt verbinden, sondern können über ein Via auf die andere Seite der Platine geführt werden. 
+Dies reduziert den Routing-Aufwand und trägt zu einem saubereren, zuverlässigeren Layout bei.
+
+\subsubsection{Stitching Vias}
+% TODO: Put it under GND-Flächen?
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{resources/Board/Layout/Stitching Vias.png}
+    \caption{Stitching Vias}
+\end{figure}
+
+\subsubsection{Power-Planes}
+Power-Planes, auch Versorgungsflächen genannt, bieten mehrere Vorteile. Durch die großflächige Versorgung fließt der Strom nicht durch enge Leiterbahnen, wodurch Wärmeentwicklung und Spannungsabfall reduziert werden. 
+Außerdem verringern große Flächen die Induktivität im Vergleich zu schmalen Traces, was insbesondere bei Mikrocontrollern zu einer stabileren Versorgung beiträgt. In Kombination mit den GND-Flächen wirken die Power-Planes wie ein großflächiger Kondensator, der elektromagnetische Störungen filtert und somit eine saubere Versorgung sicherstellt.
+
 % TODO: The sizes are hacked, maybe just insert the images afterwards into the PDF?
 
 \begin{figure}[H]
@@ -232,7 +267,15 @@ Das Gehäuse wurde in Autodesk Fusion konzipiert.
         \caption{Ansicht 2}
     \end{subfigure}
     \caption{Gehäuse des Fahrradlichts}
+    \label{fig:cases}
 \end{figure}
+
+Wie in Abbildung \ref{fig:cases} zu erkennen ist, wurde für das Gehäusedesign eine organische Form gewählt. 
+Ein boxartiges Design sollte vermieden werden. 
+Dies führte jedoch dazu, dass die Fertigung mittels FDM-Druck erschwert wird; 
+daher wurde auch der SLA-Druck in Betracht gezogen.
+
+% TODO: FDM vs SLA?
 
 % TODO: Rewrite this shit 😭
 Um das Gehäuse wasserdicht auszuführen, wurde der Einsatz verschiedener Materialien in Betracht gezogen. 
@@ -245,19 +288,34 @@ Dieser kann entweder als Standardbauteil zugekauft oder alternativ ebenfalls aus
 
 % TODO: Render of pole 
 
-Der LiPo-Akku ist hinter der Leiterplatte im Gehäuse positioniert (siehe Abbildung \ref{batterie_im_gehaeuse}). 
+Der LiPo-Akku ist hinter der Leiterplatte im Gehäuse positioniert (siehe Abbildung \ref{fig:batterie_im_gehaeuse}). 
 Daraus ergab sich die besondere Form der Leiterplatte, die eine einfache Führung des Akkukabels in den hinteren Teil des Gehäuses ermöglicht.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.3\textwidth]{resources/CAD/Shell with battery.png}
-    \caption{Batterie im Gehäuse}
-    \label{batterie_im_gehaeuse}
+
+    \begin{subfigure}[b]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{resources/CAD/Shell with battery.png}
+        \caption{Batterie im Gehäuse}
+        \label{fig:batterie_im_gehaeuse}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{resources/CAD/Shell with Battery and PCB.png}
+        \caption{Batterie und PCB im Gehäuse}
+        \label{fig:batterie_und_pcb_im_gehaeuse}
+    \end{subfigure}
+
+    \caption{Bestückung des Gehäuses}
+    \label{fig:gehaeuse_bestueckung}
 \end{figure}
 
 
+
 % TODO: Button, Mounting
-\noindent Für das Fahrradlicht wird zwischen dem aus TPU gefertigten Button und dem eigentlichen Taster ein Stift eingesetzt. Dieser Stift dient als mechanisches Übertragungselement und sorgt dafür, dass die Betätigungskraft des Buttons zuverlässig und gleichmäßig auf den darunterliegenden Taster weitergegeben wird. Durch diese Konstruktion bleibt das charakteristische taktile Feedback des Tasters erhalten, sodass der Benutzer beim Drücken des Buttons ein klares, definiertes Schaltgefühl wahrnimmt. Der Taster ist in Abbildung \ref{top_view} blau gekennzeichnet.
+\noindent Für das Fahrradlicht wird zwischen dem aus TPU gefertigten Button und dem eigentlichen Taster ein Stift eingesetzt. Dieser Stift dient als mechanisches Übertragungselement und sorgt dafür, dass die Betätigungskraft des Buttons zuverlässig und gleichmäßig auf den darunterliegenden Taster weitergegeben wird. Durch diese Konstruktion bleibt das charakteristische taktile Feedback des Tasters erhalten, sodass der Benutzer beim Drücken des Buttons ein klares, definiertes Schaltgefühl wahrnimmt. Der Taster ist in Abbildung \ref{fig:tpu_taste} blau gekennzeichnet.
 
 \begin{figure}[h]
     \centering
@@ -273,5 +331,5 @@ Daraus ergab sich die besondere Form der Leiterplatte, die eine einfache Führun
         \caption{Side View}
     \end{subfigure}
     \caption{TPU Taste}
-    \label{fig:label}
+    \label{fig:tpu_taste}
 \end{figure}
