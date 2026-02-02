@@ -219,8 +219,59 @@ Das Gehäuse wurde in Autodesk Fusion konzipiert.
 
 \subsection{Gehäuse}
 
-Um das Gehäuse wasserdicht zu halten, hat man die Nutzung verschiedener Materialien bedacht. Es soll eine Dichtung aus TPU gefertigt werden, die bei der Montage in die Innenwände des Gehäuses eingesetzt wird. Für den USB-C Port soll ein wasserdichter Stöpsel das System wasserfrei halten. 
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{resources/CAD/Design-3kx3k.png}
+        \caption{Ansicht 1}
+    \end{subfigure}\hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{resources/CAD/Design-3kx3k-2.png}
+        \caption{Ansicht 2}
+    \end{subfigure}
+    \caption{Gehäuse des Fahrradlichts}
+\end{figure}
 
-Für die Montage an das Fahrrad wollte man einen Gummiring verwenden. Dieser könnte entweder gekauft werden oder ebenfalls aus TPU gedruckt werden.  
+% TODO: Rewrite this shit 😭
+Um das Gehäuse wasserdicht auszuführen, wurde der Einsatz verschiedener Materialien in Betracht gezogen. 
+Es ist vorgesehen, eine Dichtung aus TPU zu fertigen, die bei der Montage in die Innenwände des Gehäuses eingesetzt wird. 
+Zusätzlich soll der USB-C-Port durch einen wasserdichten Stöpsel gegen das Eindringen von Wasser geschützt werden.
 
-Der LiPo-Akku sollte sich hinter der Leiterplatte im Gehäuse befinden. Aufgrund dessen hat sich die besondere Form der Leiterplatte ergeben. 
+
+Für die Befestigung am Fahrrad ist die Verwendung eines Gummirings vorgesehen. 
+Dieser kann entweder als Standardbauteil zugekauft oder alternativ ebenfalls aus TPU gefertigt werden.
+
+% TODO: Render of pole 
+
+Der LiPo-Akku ist hinter der Leiterplatte im Gehäuse positioniert (siehe Abbildung \ref{batterie_im_gehaeuse}). 
+Daraus ergab sich die besondere Form der Leiterplatte, die eine einfache Führung des Akkukabels in den hinteren Teil des Gehäuses ermöglicht.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.3\textwidth]{resources/CAD/Shell with battery.png}
+    \caption{Batterie im Gehäuse}
+    \label{batterie_im_gehaeuse}
+\end{figure}
+
+
+% TODO: Button, Mounting
+\noindent Für das Fahrradlicht wird zwischen dem aus TPU gefertigten Button und dem eigentlichen Taster ein Stift eingesetzt. Dieser Stift dient als mechanisches Übertragungselement und sorgt dafür, dass die Betätigungskraft des Buttons zuverlässig und gleichmäßig auf den darunterliegenden Taster weitergegeben wird. Durch diese Konstruktion bleibt das charakteristische taktile Feedback des Tasters erhalten, sodass der Benutzer beim Drücken des Buttons ein klares, definiertes Schaltgefühl wahrnimmt. Der Taster ist in Abbildung \ref{top_view} blau gekennzeichnet.
+
+\begin{figure}[h]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{resources/CAD/View2.png}
+        \caption{Top View}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{resources/CAD/View3-Cut.png}
+        \caption{Side View}
+    \end{subfigure}
+    \caption{TPU Taste}
+    \label{fig:label}
+\end{figure}
